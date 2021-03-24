@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera camera;
     private Vector2 _facingDirection;
+    public Transform bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,14 @@ public class PlayerController : MonoBehaviour
         // Aim movement
         _facingDirection = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         _aim.position = transform.position + (Vector3)_facingDirection.normalized;
+
+        // Detect user click to shoot
+        if (Input.GetMouseButton(0)) 
+        {
+            float angle = Mathf.Atan2(_facingDirection.y, _facingDirection.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Instantiate(bullet, transform.position, targetRotation);
+        }
 
     }
 }
