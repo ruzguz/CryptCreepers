@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
 
     // General vars
-    [SerializeField] private int health = 1;
+    [SerializeField] private int _health = 1;
     [SerializeField] private float _speed = 1;
     private Transform _player;
     
@@ -24,11 +24,17 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = _player.position - transform.position;
         transform.position += (Vector3)direction.normalized * Time.deltaTime * _speed;
         
+
+        // Check enemy health
+        if (_health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Decrease enemy health
     public void TakeDamage()
     {
-        health--;
+        _health--;
     }
 }
