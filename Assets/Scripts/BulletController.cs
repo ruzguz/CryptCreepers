@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-
-    [SerializeField]
-    private float _speed = 5;
+    // General vars
+    [SerializeField] private float _speed = 5;
+    private int _lifeTime = 5;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, _lifeTime);
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += transform.right * _speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        
+        // Bullet collide with enemy
+        if (other.CompareTag("Enemy")) 
+        {
+            other.GetComponent<EnemyController>().TakeDamage();
+            Destroy(gameObject);
+        }
     }
 }
