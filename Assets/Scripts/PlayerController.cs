@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     // General vars
+    [SerializeField] private int _health = 3;
     float h, v;
     [SerializeField] private float _speed;
     Vector3 moveDirection;
-    [SerializeField] private Transform _aim;
-    [SerializeField] private Camera camera;
     private Vector2 _facingDirection;
-    public Transform bullet;
     private bool _gunLoaded = true;
     [SerializeField] private float fireRate = 1;
+
+    // References
+    [SerializeField] private Camera camera;
+    [SerializeField] private Transform _aim;
+    public Transform bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +50,33 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ReloadGun());
         }
 
+        // Check player health
+        if (_health <= 0)
+        {
+            Debug.Log("Player Dies");
+        }
     }
 
+    // Coroutine to reload the gun
     IEnumerator ReloadGun()
     {
         yield return new WaitForSeconds(1/fireRate);
         _gunLoaded = true;
     }
+
+    // Decrease player health
+    public void TakeDamage()
+    {
+        _health--;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        // ENemy touch player
+        if (other.CompareTag("Enemy"))
+        {
+            TakeDamage();
+        }    
+    }
+
+
 }
