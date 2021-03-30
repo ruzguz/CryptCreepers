@@ -12228,7 +12228,7 @@ GameObject:
   - component: {fileID: 1478016294}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12311,11 +12311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d31df15c8f294a2395eb1e4340c9457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 3
   _speed: 3
-  _aim: {fileID: 1090500253}
-  camera: {fileID: 519420031}
-  bullet: {fileID: 590158119359240768, guid: ffbe56e6efe604564b9f4c56baca6aa3, type: 3}
   fireRate: 1
+  camera: {fileID: 519420031}
+  _aim: {fileID: 1090500253}
+  bullet: {fileID: 590158119359240768, guid: ffbe56e6efe604564b9f4c56baca6aa3, type: 3}
 --- !u!1 &1733531035
 GameObject:
   m_ObjectHideFlags: 0
@@ -12438,6 +12439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e48edd957b3e40b4abd1e82e5d26111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 1
+  _speed: 5
 --- !u!1 &2064828501
 GameObject:
   m_ObjectHideFlags: 0
