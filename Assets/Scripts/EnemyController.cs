@@ -24,17 +24,17 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = _player.position - transform.position;
         transform.position += (Vector3)direction.normalized * Time.deltaTime * _speed;
         
-
-        // Check enemy health
-        if (_health <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     // Decrease enemy health
     public void TakeDamage()
     {
         _health--;
+        
+        // Check enemy health
+        if (_health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

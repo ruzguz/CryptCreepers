@@ -49,12 +49,6 @@ public class PlayerController : MonoBehaviour
             Instantiate(bullet, transform.position, targetRotation);
             StartCoroutine(ReloadGun());
         }
-
-        // Check player health
-        if (_health <= 0)
-        {
-            Debug.Log("Player Dies");
-        }
     }
 
     // Coroutine to reload the gun
@@ -68,6 +62,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         _health--;
+
+        // Check player health
+        if (_health <= 0)
+        {
+            //TODO: Game over
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
