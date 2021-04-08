@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // General vars
+    public int difficulty = 1;
     [SerializeField] private int _time = 30;
     
     private void Awake() {
