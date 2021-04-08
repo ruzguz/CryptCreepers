@@ -9,12 +9,16 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int _health = 1;
     [SerializeField] private float _speed = 1;
     private Transform _player;
+
     
 
     // Start is called before the first frame update
     void Start()
     {
         _player = FindObjectOfType<PlayerController>().transform;
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
+        transform.position = spawnPoints[randomSpawnPoint].transform.position;
     }
 
     // Update is called once per frame
