@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     // General vars
     public int difficulty = 1;
-    [SerializeField] private int _time = 30;
+    public int time = 30;
     
     private void Awake() {
         if (instance == null) 
@@ -27,10 +27,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TimeCountdown() 
     {
-        while (_time > 0) 
+        while (time > 0) 
         {
             yield return new WaitForSeconds(1);
-            _time--;
+            time--;
         }
     }
 }
