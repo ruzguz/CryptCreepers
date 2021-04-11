@@ -7,6 +7,8 @@ public class BulletController : MonoBehaviour
     // General vars
     [SerializeField] private float _speed = 5;
     private int _lifeTime = 5;
+    [SerializeField] private int _health = 3;
+    public bool powerShoot;
  
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,19 @@ public class BulletController : MonoBehaviour
         if (other.CompareTag("Enemy")) 
         {
             other.GetComponent<EnemyController>().TakeDamage();
-            Destroy(gameObject);
+
+            if (!powerShoot) 
+            {
+                Destroy(gameObject);
+            }
+
+            _health--;
+
+            if (_health <= 0) 
+            {
+                Destroy(gameObject);
+            }
+
         }
     }
 }

@@ -7,7 +7,8 @@ public class PowerUp : MonoBehaviour
     public enum PowerUpType 
     {
         FireRateIncrease,
-        PowerShot
+        PowerShot,
+        Invulnerability
     }
 
     public PowerUpType powerUpType;

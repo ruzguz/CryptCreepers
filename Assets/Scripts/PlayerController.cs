@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _facingDirection;
     private bool _gunLoaded = true;
     [SerializeField] private float fireRate = 1;
+    [SerializeField] private bool _powerShootEnabled;
 
     // References
     [SerializeField] private Camera camera;
@@ -46,7 +47,12 @@ public class PlayerController : MonoBehaviour
             _gunLoaded = false;
             float angle = Mathf.Atan2(_facingDirection.y, _facingDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            Instantiate(bullet, transform.position, targetRotation);
+            Transform newBullet  = Instantiate(bullet, transform.position, targetRotation);
+            if (_powerShootEnabled)
+            {
+                newBullet.GetComponent<BulletController>().powerShoot = true;
+                _powerShootEnabled = false;
+            }
             StartCoroutine(ReloadGun());
         }
     }
@@ -76,6 +82,21 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage();
         }    
+
+        // Coller Power Up
+        if (other.CompareTag("PowerUp")) 
+        {
+            switch (other.GetComponent<PowerUp>().powerUpType)
+            {
+                case PowerUp.PowerUpType.FireRateIncrease:
+                    fireRate++;
+                    break;
+                case PowerUp.PowerUpType.PowerShot:
+                    _powerShootEnabled = true;
+                    break;
+            }
+            Destroy(other.gameObject, 0.1f);
+        } 
     }
 
 
