@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private bool _gunLoaded = true;
     [SerializeField] private float fireRate = 1;
     [SerializeField] private bool _powerShootEnabled;
+    [SerializeField] private bool _invulnerabilityEnabled = false;
+    [SerializeField] private int _invulnerabilityTime = 3;
 
     // References
     [SerializeField] private Camera camera;
@@ -80,7 +82,11 @@ public class PlayerController : MonoBehaviour
         // ENemy touch player
         if (other.CompareTag("Enemy"))
         {
-            TakeDamage();
+            if (!_invulnerabilityEnabled) 
+            {
+                TakeDamage();
+            }
+            
         }    
 
         // Coller Power Up
@@ -94,10 +100,18 @@ public class PlayerController : MonoBehaviour
                 case PowerUp.PowerUpType.PowerShot:
                     _powerShootEnabled = true;
                     break;
+                case PowerUp.PowerUpType.Invulnerability:
+                    StartCoroutine(ActiveInvulnerability());
+                    break;
             }
             Destroy(other.gameObject, 0.1f);
         } 
     }
 
-
+    IEnumerator ActiveInvulnerability()
+    {
+        _invulnerabilityEnabled = true;
+        yield return new WaitForSeconds(_invulnerabilityTime);
+        _invulnerabilityEnabled = false;
+    }
 }
