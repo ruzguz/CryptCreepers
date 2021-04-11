@@ -10,6 +10,20 @@ public class GameManager : MonoBehaviour
     // General vars
     public int difficulty = 1;
     public int time = 30;
+    [SerializeField] private int _score;
+    public int Score 
+    {
+        get => _score;
+        set 
+        {
+            _score = value;
+            if (_score % 1000 == 0)
+            {
+                difficulty++;
+            }
+        }
+    }
+
     
     private void Awake() {
         if (instance == null) 

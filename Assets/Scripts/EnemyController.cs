@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int _health = 1;
     [SerializeField] private float _speed = 1;
     private Transform _player;
+    private int _scoreValue = 100;
 
     
 
@@ -38,6 +39,7 @@ public class EnemyController : MonoBehaviour
         // Check enemy health
         if (_health <= 0)
         {
+            GameManager.instance.Score += _scoreValue;
             Destroy(gameObject);
         }
     }
